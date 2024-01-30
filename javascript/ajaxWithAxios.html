@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>ajax with axios</h1>
+    x : <input type="text" name="xvalue" id="xvalue" /> <br />
+    y : <input type="text" name="yvalue" id="yvalue" /> <br />
+    result
+    <div
+      id="result"
+      style="border: 1px solid red; width: 50px; height: 50px"
+    ></div>
+
+    <button id="btnSend">비동기 호출</button>
+  </body>
+</html>
+
+<script>
+  //get 방식
+  // document.querySelector('#btnSend').addEventListener('click', () => {
+
+  //   let x = document.getElementById("xvalue").value;
+  //   let y = document.getElementById("yvalue").value;
+  //   let url = `http://127.0.0.1:8080/add1?x=${x}&y=${y}`;
+
+  //   axios
+  //     .get(url)
+  //     .then((res) => {
+  //       document.getElementById('result').innerHTML = res.data.result;
+  //       alert(res.data.result);
+  //       console.log(res);
+  //     })
+  //     .catch((msg) => {
+  //       console.log(msg);
+  //     });
+  // });
+
+  //POST 방식
+  document.querySelector('#btnSend').addEventListener('click', () => {
+    let x = document.getElementById('xvalue').value;
+    let y = document.getElementById('yvalue').value;
+    let url = `http://127.0.0.1:8080/add4`;
+
+    axios
+      .post(url, {
+        x: x,
+        y: y,
+      })
+      .then((res) => {
+        document.getElementById('result').innerHTML = res.data.result;
+        alert(res.data.result);
+        console.log(res);
+      })
+      .catch((msg) => {
+        console.log(msg);
+      });
+  });
+</script>

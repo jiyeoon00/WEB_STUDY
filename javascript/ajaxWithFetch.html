@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>ajax with fetch</h1>
+
+    <div
+      id="result"
+      style="border: 1px solid red; width: 400px; height: 200px"
+    ></div>
+
+    <button id="btnSend">비동기 호출</button>
+  </body>
+</html>
+
+<script>
+  //fetch가 주는 결과는 Promise객체이다.
+  //promise가 일을 종료할때까지 기다린다.
+  fetch('http://127.0.0.1:8080/userInfo')
+    .then((res) => {
+      console.log(res);
+      return res.json(); //데이터 다음 then구문으로 전달
+    })
+    .then((data) => {
+      console.log(data); //JSON객체로 전환시켜온다.
+      document.getElementById('result').innerHTML =
+        data.address + data.phone + data.name;
+    })
+    .catch((error) => {
+      console.log(errer);
+    });
+</script>
