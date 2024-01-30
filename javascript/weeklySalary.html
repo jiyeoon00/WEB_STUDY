@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      thead td,
+      tbody td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+      }
+      table {
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <td>이름</td>
+          <td>시간</td>
+          <td>시간당급여액</td>
+          <td>주급</td>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </body>
+</html>
+
+<script>
+  let salaryInfos = {
+    data: [
+      {
+        name: '홍길동',
+        time: 40,
+        payForTime: 10000,
+      },
+      {
+        name: '임꺽정',
+        time: 30,
+        payForTime: 20000,
+      },
+      {
+        name: '장길산',
+        time: 20,
+        payForTime: 20000,
+      },
+      {
+        name: '김미영',
+        time: 15,
+        payForTime: 30000,
+      },
+    ],
+  };
+
+  window.onload = load();
+
+  function load() {
+    let tbody = document.getElementById('tbody');
+
+    salaryInfos.data.forEach((item) => {
+      let row = tbody.insertRow(tbody.rows.length);
+      let cell1 = row.insertCell(0);
+      let cell2 = row.insertCell(1);
+      let cell3 = row.insertCell(2);
+      let cell4 = row.insertCell(3);
+
+      cell1.innerHTML = item.name;
+      cell2.innerHTML = item.time;
+      cell3.innerHTML = parseInt(item.payForTime).toLocaleString();
+      cell4.innerHTML = calWeeklySalary(
+        item.time,
+        item.payForTime
+      ).toLocaleString();
+    });
+  }
+
+  function calWeeklySalary(time, payForTime) {
+    basePay = time * payForTime;
+    overPay = 0;
+    if (time > 20) {
+      //근무시간이 20시간 넘을 경우 나머지 시간은 50% 가산해서 계산
+      overPay += (time - 20) * (payForTime / 2);
+    }
+    return basePay + overPay;
+  }
+</script>
