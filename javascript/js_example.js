@@ -7,6 +7,7 @@
  모든 변수는 호이스팅 된다. (= 선언이 먼저 메모리에 저장됨)
  var은 undefined로 초기화 되어 저장되지만,
  let과 const는 초기화되지 않은 상태로 선언만 메모리에 저장된다.
+ let aaa; 구문을 만나야 undefined로 초기화된다.
  ********/
 
 console.log(test); //undefined으로 자동 초기화.
@@ -72,3 +73,51 @@ const result = arr2.reduce((acc, cur) => {
 }, 0);
 
 console.log(result);
+
+/*********
+ 일반함수로 만들면, 함수가 뒤에 있어도 호출 가능
+ 화살표함수나 함수표현식의 경우는 변수에 함수의 주소만 저장한다.
+ 따라서 함수 사용 전 변수가 미리 초기화 되어야 한다.
+ *********/
+
+function makeAdder(x) {
+  //makeAdder 초기화 됨
+  return function (y) {
+    return x + y;
+  };
+}
+
+//add3는 아직 초기화 X
+
+const add3 = makeAdder(3); //add3는 해당 구문을 만나고 나서야 초기화
+console.log(add3(2)); //함수가 생성될 당시의 외부 변수를 기억하고 있어서 생성 이후에도 계속 접근 가능
+
+/**********
+ * 옵셔널 체이닝 (연산자 ?.)
+ 체인의 각 참조가 유효한지 검증
+ 연결된 체인 내에 깊숙이 위치한 속성 값을 읽을 수 있다.
+
+ 왜 사용? 여러명의 사용자 중에 몇 명은 주소 정보를 가지고 있지 않다고 하자.
+ 이때, user.address.detail로 해당 주소에 접근하게 되면 에러가 발생한다.
+ 원래는 해당 참조가 유효한지 &&, if 등을 사용해 검증해야 했다.
+ ?.은 ?.'앞’의 평가 대상이 undefined나 null이면 평가를 멈추고 undefined를 반환합니다.
+ 따라서 user.address.detail로 안전하게 접근 가능하다.
+
+ 사용 시 주의할 점
+ ?.는 존재하지 않아도 되는 대상에만 사용해야 한다.
+ 만약 필수값인 user에 옵셔널체이닝을 사용한다면 실수로 user를 누락했어도 에러가 나지 않아 에러 발견&디버깅이 어려워진다.
+ 
+ **********/
+const user = {
+  name: '지연',
+  hasOwnProperty: function () {
+    console.log('aa');
+  },
+  // address 없을 수 있는 객체
+  // address: {
+  //   detail: '서울특별시 땡땡구',
+  // },
+};
+
+//console.log(user.address.detail); //user.address, 즉 undefined 에 접근하므로 에러난다.
+console.log(user.address?.detail); //유효하지 않은 값에 접근하므로 undefined 리턴
