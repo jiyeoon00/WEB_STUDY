@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>리액트로 카운터 만들기</h1>
+    <div id="counter"></div>
+
+    <script type="text/babel">
+      ReactDOM.render(
+        <div>
+          <Counter />
+          <Counter />
+        </div>, //첫번째 매개변수 : 트리구조의 태그집합
+        document.getElementById('counter') //두번째 매개변수 : 시작태그객체
+      );
+
+      function Counter() {
+        const [cnt, setCnt] = React.useState(0);
+        const increase = () => {
+          setCnt(cnt + 1);
+        };
+        const decrease = () => {
+          setCnt(cnt - 1);
+        };
+
+        return (
+          <div>
+            <h1>{cnt}</h1>
+            <button type="button" onClick={increase}>
+              ++
+            </button>
+            <button type="button" onClick={decrease}>
+              --
+            </button>
+          </div>
+        );
+      }
+    </script>
+  </body>
+</html>

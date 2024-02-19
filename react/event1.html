@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>SPA(Single Page Application)</h1>
+    <div id="root"></div>
+    <script type="text/babel">
+      ReactDOM.render(
+        <div>
+          <MyComponent />
+        </div>, //첫번째 매개변수 - 트리구조의 태그 집합
+        document.getElementById('root') // 두번째 매개변수 - 기준점이 되는 태그 객체
+      );
+
+      //함수기반 컴포넌트 - 이벤트 처리
+      function MyComponent() {
+        //onclick = {함수 주소}
+        const click = () => {
+          alert('이벤트발생1');
+        };
+
+        /**
+         * 페이지가 로드될 때 alert('이벤트발생2')가 즉시 실행 (버트을 클릭하지 않아도)
+         *
+         * 이유는 JSX가 JavaScript로 변환될 때,
+         * onClick에 함수를 할당하는 것이 아니라 함수 호출 결과를 할당하기 때문입니다.
+         *
+         * onClick에 alert('이벤트발생2')가 직접 할당되면,
+         * 이벤트 핸들러를 클릭 이벤트에 바인딩하는 것이 아니라,
+         * 페이지 로딩 시점에서 alert('이벤트발생2')가 실행되어 버튼이 렌더링되는 동시에 이벤트가 발생합니다.
+         *
+         * 따라서 함수 자체를 onClick 이벤트 핸들러에 할당해야 한다.
+         **/
+        return (
+          <div>
+            <button type="button" onClick={click}>
+              이벤트 발생1
+            </button>
+            <button type="button" onClick={alert('이벤트발생2')}>
+              이벤트 발생2
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                alert('이벤트 발생3');
+              }}
+            >
+              이벤트 발생3
+            </button>
+          </div>
+        );
+      }
+    </script>
+  </body>
+</html>

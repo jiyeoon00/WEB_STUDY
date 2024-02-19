@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>SPA(Single Page Application)</h1>
+    <div id="root"></div>
+    <script type="text/babel">
+      //사용자 정의 컴포넌트를 만든다. React.Component를 상속받는다.
+      //반드시 오버라이딩 해야하는 함수 = render : UI구성을 한다.
+      class AppClass extends React.Component {
+        render() {
+          return (
+            //트리구조 여야 한다. jsx문법 규칙 따른다.
+            <div>
+              <h3>사용자 컴포넌트3</h3>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <div>
+          <AppClass />
+        </div>,
+        document.getElementById('root') // 기준점이 되는 태그 객체
+      );
+    </script>
+  </body>
+</html>

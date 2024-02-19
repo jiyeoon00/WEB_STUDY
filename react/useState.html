@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>SPA(Single Page Application)</h1>
+    <div id="root"></div>
+    <script type="text/babel">
+      ReactDOM.render(
+        <div>
+          <MyComponent />
+          <MyComponent />
+        </div>, //첫번째 매개변수 - 트리구조의 태그 집합
+        document.getElementById('root') // 두번째 매개변수 - 기준점이 되는 태그 객체
+      );
+
+      //함수기반 컴포넌트 - 이벤트 처리
+      function MyComponent() {
+        /**
+        자체적으로 state라는게 있다.
+        상태정보, 변수들을 state에 저장하고 이 변수 값을 바꾸면 state를 확인해서 바뀐 부분만 다시 렌더링을 해준다.
+
+        state한테 변수 만들어라 그리고 주소를 주세요.
+        React.useState("초기데이터");
+
+        반환값이 [변수주소, 함수주소] 배열이다.
+        첫번째 요소 값 : 저장된 공간에 대한 정보
+        두번째 요소 값 : 저장된 공간에 접근할 수 있는 함수 주소
+
+        함수명은 가급적 set변수명, 카멜표기법 사용
+        const로 받는 이유? 사용자가 관리하는 것이 아닌 useState가 관리, 사용자가 바꿀 수 있는 값이 아니다.
+        **/
+        const [name, setName] = React.useState('홍길동');
+        const [age, setAge] = React.useState(23);
+
+        /**
+         * 리액트는 계속 컨포넌트를 바라보고 있다.
+         * 컴토넌트 내 데이터에 변화가 생기면 계속해서 리렌더링한다.
+         *
+         * 따라서 코드를 여기에 두면 계속 setName, setAge함수 호출하며 리렌더링 => 무한렌더링 상태
+         * 따라서 실행할 코드를 함수안에 넣고 해당 함수를 호출해야 한다.
+         **/
+        //setName('임꺽정');
+        //setAge(30);
+
+        const setValue = () => {
+          setName('임꺽정');
+          setAge(30);
+        };
+
+        return (
+          //{}은 코드를 넣는 공간
+          <div>
+            <h1>{name}</h1>
+            <div>{name + '님의 나이는 ' + age + ' 입니다.'}</div>
+            <button type="button" onClick={setValue}>
+              값 바꾸기
+            </button>
+          </div>
+        );
+      }
+    </script>
+  </body>
+</html>

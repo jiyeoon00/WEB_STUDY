@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>SPA(Single Page Application)</h1>
+    <div id="root"></div>
+    <script type="text/babel">
+      /**
+       * 사용자 컴포넌트 앞글자 대문자 쓰는 이유?
+       *
+       * JSX문법에서 일반 HTML과 컴포넌트를 구분하기 위해서
+       *
+       * JSX에서 대문자로 시작하는 태그는 컴포넌트로 인식되고, 소문자로 시작하는 태그는 일반 HTML로 구분된다.
+       * 따라서 React 컴포넌트를 만들 때는 대문자로 시작하는 것이 규칙이다.
+       **/
+      function AppClass() {
+        return (
+          //트리구조 여야 한다. jsx문법 규칙 따른다.
+          //style은 일반 html고 다르다. {json 객체}
+          <div>
+            <h3 style={{ color: 'red' }}>사용자 컴포넌트2</h3>
+          </div>
+        );
+      }
+
+      ReactDOM.render(
+        <div>
+          <AppClass />
+        </div>,
+        document.getElementById('root') // 기준점이 되는 태그 객체
+      );
+    </script>
+  </body>
+</html>
