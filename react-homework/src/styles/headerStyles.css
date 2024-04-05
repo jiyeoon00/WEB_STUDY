@@ -1,0 +1,39 @@
+.headerStyle {
+  display: flex;
+  justify-content: space-between;
+  background-color: skyblue;
+  padding: 20px 60px;
+  border-radius: 5px;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+.headerStyle p {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
+
+.headerStyle li:nth-child(2) span {
+  margin-right: 20px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.headerStyle button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.headerStyle button:hover {
+  background-color: #16821c;
+}
